@@ -1,7 +1,6 @@
 import React from "react";
-import { connect } from 'react-redux'
-import { increase } from '../ducks/counter'
-
+import { connect } from "react-redux";
+import { increase } from "../ducks/counter";
 
 class Increase extends React.Component {
   render() {
@@ -14,9 +13,9 @@ class Increase extends React.Component {
   }
 }
 
-const mapDispatchToProps = { increase }
+const mapDispatchToProps = { increase };
 
 export default connect(
   null,
   mapDispatchToProps
-)(Increase)
+)(Increase);

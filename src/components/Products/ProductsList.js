@@ -8,6 +8,7 @@ import {
 
 import { Link } from "react-router-dom";
 
+// TODO: add pagination
 class ProductsList extends React.Component {
   componentDidMount() {
     this.props.fetchProducts();
@@ -16,7 +17,9 @@ class ProductsList extends React.Component {
   render() {
     return (
       <div>
-        <h1>ProductsList</h1>
+        <h1>
+          ProductsList <Link to="/products/new">New Product</Link>
+        </h1>
 
         {this.props.isLoading && <div>Loading...</div>}
 

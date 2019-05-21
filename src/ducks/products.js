@@ -14,6 +14,10 @@ const FETCH_ONE_REQUEST = `${appName}/${moduleName}/FETCH_ONE/REQUEST`;
 const FETCH_ONE_SUCCESS = `${appName}/${moduleName}/FETCH_ONE/SUCCESS`;
 const FETCH_ONE_FAILURE = `${appName}/${moduleName}/FETCH_ONE/FAILURE`;
 
+const SAVE_NEW_REQUEST = `${appName}/${moduleName}/SAVE_NEW/REQUEST`;
+const SAVE_NEW_SUCCESS = `${appName}/${moduleName}/SAVE_NEW/SUCCESS`;
+const SAVE_NEW_FAILURE = `${appName}/${moduleName}/SAVE_NEW/FAILURE`;
+
 /**
  * Action creator
  */
@@ -54,6 +58,32 @@ export const fetchProduct = id => async (dispatch, _getState, { api }) => {
   } catch (error) {
     dispatch({
       type: FETCH_ONE_FAILURE,
+      payload: error
+    });
+  }
+};
+
+export const saveNewProduct = newProduct => async (
+  dispatch,
+  _getState,
+  { api }
+) => {
+  dispatch({
+    type: SAVE_NEW_REQUEST
+  });
+
+  try {
+    const product = await api.products.saveNew(newProduct);
+
+    dispatch({
+      type: SAVE_NEW_SUCCESS,
+      payload: product
+    });
+
+    return product;
+  } catch (error) {
+    dispatch({
+      type: SAVE_NEW_FAILURE,
       payload: error
     });
   }

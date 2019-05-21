@@ -7,3 +7,7 @@ const extractData = response => response.data;
 export function getAll() {
   return axios.get(`${BASE_URL}/products`).then(extractData);
 }
+
+export function getOne(id) {
+  return axios.get(`${BASE_URL}/products/${id}`).then(extractData);
+}

@@ -1,6 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchProducts, productsSelector } from "../../ducks/products";
+import {
+  fetchProducts,
+  productsSelector,
+  isLoadingSelector
+} from "../../ducks/products";
+
+import { Link } from "react-router-dom";
 
 class ProductsList extends React.Component {
   componentDidMount() {
@@ -11,8 +17,13 @@ class ProductsList extends React.Component {
     return (
       <div>
         <h1>ProductsList</h1>
+
+        {this.props.isLoading && <div>Loading...</div>}
+
         {this.props.products.map(product => (
-          <div key={product.id}>{product.name}</div>
+          <div key={product.id}>
+            <Link to={`/products/${product.id}`}>{product.name}</Link>
+          </div>
         ))}
       </div>
     );
@@ -21,7 +32,8 @@ class ProductsList extends React.Component {
 
 export default connect(
   state => ({
-    products: productsSelector(state)
+    products: productsSelector(state),
+    isLoading: isLoadingSelector(state)
   }),
   { fetchProducts }
 )(ProductsList);

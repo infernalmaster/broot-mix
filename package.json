@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start-server": "json-server --watch db.json --port 3004 -d 500",
+    "start-server": "json-server --watch db.json --port 3004 -d 1000",
     "build": "react-scripts build",
     "lint": "eslint --ext js,jsx src",
     "format": "eslint --fix --ext js,jsx src",

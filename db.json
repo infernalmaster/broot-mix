@@ -3,6 +3,10 @@
     {
       "id": "1",
       "name": "some product"
+    },
+    {
+      "id": "2",
+      "name": "some product 2"
     }
   ],
   "todos": [

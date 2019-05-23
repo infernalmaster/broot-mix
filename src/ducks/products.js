@@ -26,13 +26,13 @@ const SAVE_FAILURE = `${appName}/${moduleName}/SAVE/FAILURE`;
  * Action creator
  */
 
-export const fetchProducts = () => async (dispatch, _getState, { api }) => {
+export const fetchProducts = page => async (dispatch, _getState, { api }) => {
   dispatch({
     type: FETCH_LIST_REQUEST
   });
 
   try {
-    const data = await api.products.getAll();
+    const data = await api.products.getAll(page);
 
     dispatch({
       type: FETCH_LIST_SUCCESS,
@@ -180,4 +180,7 @@ export const isLoadingSelector = createSelector(
   stateSelector,
   state => state.isLoading
 );
-// export totalPages =
+export const totalPagesSelector = createSelector(
+  stateSelector,
+  state => Math.ceil(state.total / state.limit)
+);

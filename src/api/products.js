@@ -4,8 +4,15 @@ const BASE_URL = process.env.REACT_APP_SERVER_URL;
 
 const extractData = response => response.data;
 
-export function getAll() {
-  return axios.get(`${BASE_URL}/products`).then(extractData);
+export function getAll(page = 1, limit = 2) {
+  return axios
+    .get(`${BASE_URL}/products?_page=${page}&_limit=${limit}`)
+    .then(response => ({
+      list: response.data,
+      total: Number(response.headers["x-total-count"]),
+      page,
+      limit
+    }));
 }
 
 export function getOne(id) {
@@ -16,4 +23,8 @@ export function saveNew(product) {
   return axios.post(`${BASE_URL}/products`, product).then(extractData);
 }
 
-// axios.put(`${BASE_URL}/products/${id}`, product).then(extractData);
+export function save(product) {
+  return axios
+    .put(`${BASE_URL}/products/${product.id}`, product)
+    .then(extractData);
+}

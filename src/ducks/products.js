@@ -18,6 +18,10 @@ const SAVE_NEW_REQUEST = `${appName}/${moduleName}/SAVE_NEW/REQUEST`;
 const SAVE_NEW_SUCCESS = `${appName}/${moduleName}/SAVE_NEW/SUCCESS`;
 const SAVE_NEW_FAILURE = `${appName}/${moduleName}/SAVE_NEW/FAILURE`;
 
+const SAVE_REQUEST = `${appName}/${moduleName}/SAVE/REQUEST`;
+const SAVE_SUCCESS = `${appName}/${moduleName}/SAVE/SUCCESS`;
+const SAVE_FAILURE = `${appName}/${moduleName}/SAVE/FAILURE`;
+
 /**
  * Action creator
  */
@@ -89,9 +93,40 @@ export const saveNewProduct = newProduct => async (
   }
 };
 
+export const saveProduct = newProduct => async (
+  dispatch,
+  _getState,
+  { api }
+) => {
+  dispatch({
+    type: SAVE_REQUEST
+  });
+
+  try {
+    const product = await api.products.save(newProduct);
+
+    dispatch({
+      type: SAVE_SUCCESS,
+      payload: product
+    });
+
+    return product;
+  } catch (error) {
+    dispatch({
+      type: SAVE_FAILURE,
+      payload: error
+    });
+  }
+};
+
 const defaultState = {
   isLoading: false,
   list: [],
+
+  total: 1,
+  page: 1,
+  limit: 1,
+
   one: null
 };
 
@@ -107,7 +142,10 @@ export default function reducer(state = defaultState, action) {
       return {
         ...state,
         isLoading: false,
-        list: action.payload
+        list: action.payload.list,
+        total: action.payload.total,
+        page: action.payload.page,
+        limit: action.payload.limit
       };
     case FETCH_ONE_REQUEST:
       return {
@@ -142,3 +180,4 @@ export const isLoadingSelector = createSelector(
   stateSelector,
   state => state.isLoading
 );
+// export totalPages =

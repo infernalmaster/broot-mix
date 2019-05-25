@@ -19,6 +19,7 @@ import NewProduct from "./components/Products/NewProduct";
 function App() {
   return (
     <div className="App">
+      <h1>ver 1</h1>
       <Router>
         <nav>
           <Link className="nav-link" to="/todo">

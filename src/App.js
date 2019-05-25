@@ -15,6 +15,7 @@ import ProductsList from "./components/Products/ProductsList";
 import ShowProduct from "./components/Products/ShowProduct";
 import EditProduct from "./components/Products/EditProduct";
 import NewProduct from "./components/Products/NewProduct";
+import Login from "./components/Login";
 
 function App() {
   return (
@@ -31,9 +32,15 @@ function App() {
           <Link className="nav-link" to="/products">
             products
           </Link>
+
+          <Link className="nav-link" to="/login">
+            login
+          </Link>
         </nav>
         {/* <Route exact path="/" component={Todo} /> */}
         <Switch>
+          <Route path="/login" component={Login} />
+
           <Route path="/todo" component={Todo} />
           <Route path="/counter" component={Counter} />
           <Redirect exact from="/" to="/todo" />

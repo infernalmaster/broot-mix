@@ -152,6 +152,7 @@ export const deleteProduct = product => async (
 
 const defaultState = {
   isLoading: false,
+  error: null,
   list: [],
 
   total: 1,
@@ -177,6 +178,12 @@ export default function reducer(state = defaultState, action) {
         total: action.payload.total,
         page: action.payload.page,
         limit: action.payload.limit
+      };
+    case FETCH_LIST_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
       };
     case FETCH_ONE_REQUEST:
       return {

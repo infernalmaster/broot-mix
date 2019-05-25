@@ -11,7 +11,5 @@ const store = createStore(
   composeEnhancers(applyMiddleware(ReduxThunk.withExtraArgument({ api })))
 );
 
-// console.log('increase', increase())
-// store.dispatch(increase())
 window.store = store;
 export default store;

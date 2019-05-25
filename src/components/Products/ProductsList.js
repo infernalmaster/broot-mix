@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 class ProductsList extends React.Component {
   componentDidMount() {
     const page = this.getPageNumber(this.props);
-    this.props.fetchProducts(page);
+    this.props.fetchProducts(page).then();
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {

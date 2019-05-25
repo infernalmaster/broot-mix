@@ -28,8 +28,6 @@ it("fetches products", async () => {
 
   await store.dispatch(fetchProducts());
 
-  console.log(store.getState());
-
   const result = productsSelector(store.getState());
 
   expect(result).toEqual(products);

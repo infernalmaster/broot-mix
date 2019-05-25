@@ -13,7 +13,10 @@ it("fetches products", async () => {
 
   const api = {
     products: {
-      getAll: () => Promise.resolve(products)
+      getAll: () =>
+        Promise.resolve({
+          list: products
+        })
     }
   };
 

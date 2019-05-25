@@ -4,7 +4,8 @@ import {
   fetchProduct,
   saveProduct,
   productSelector,
-  isLoadingSelector
+  isLoadingSelector,
+  deleteProduct
 } from "../../ducks/products";
 
 import ProductForm from "./ProductForm";
@@ -13,6 +14,12 @@ class EditProduct extends React.Component {
   componentDidMount() {
     this.props.fetchProduct(this.props.match.params.id);
   }
+
+  deleteCurrentProduct = () => {
+    this.props.deleteProduct(this.props.product).then(isDeleted => {
+      if (isDeleted) this.props.history.push("/products");
+    });
+  };
 
   render() {
     const { product, isLoading, saveProduct } = this.props;
@@ -26,6 +33,8 @@ class EditProduct extends React.Component {
         <h1>EDIT {product.name}</h1>
 
         <ProductForm product={product} saveProduct={saveProduct} />
+
+        <button onClick={this.deleteCurrentProduct}>delete</button>
       </div>
     );
   }
@@ -36,5 +45,5 @@ export default connect(
     product: productSelector(state),
     isLoading: isLoadingSelector(state)
   }),
-  { fetchProduct, saveProduct }
+  { fetchProduct, saveProduct, deleteProduct }
 )(EditProduct);

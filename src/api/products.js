@@ -28,3 +28,7 @@ export function save(product) {
     .put(`${BASE_URL}/products/${product.id}`, product)
     .then(extractData);
 }
+
+export function deleteOne(product) {
+  return axios.delete(`${BASE_URL}/products/${product.id}`);
+}

@@ -22,6 +22,10 @@ const SAVE_REQUEST = `${appName}/${moduleName}/SAVE/REQUEST`;
 const SAVE_SUCCESS = `${appName}/${moduleName}/SAVE/SUCCESS`;
 const SAVE_FAILURE = `${appName}/${moduleName}/SAVE/FAILURE`;
 
+const DELETE_REQUEST = `${appName}/${moduleName}/DELETE/REQUEST`;
+const DELETE_SUCCESS = `${appName}/${moduleName}/DELETE/SUCCESS`;
+const DELETE_FAILURE = `${appName}/${moduleName}/DELETE/FAILURE`;
+
 /**
  * Action creator
  */
@@ -116,6 +120,33 @@ export const saveProduct = newProduct => async (
       type: SAVE_FAILURE,
       payload: error
     });
+  }
+};
+
+export const deleteProduct = product => async (
+  dispatch,
+  _getState,
+  { api }
+) => {
+  dispatch({
+    type: DELETE_REQUEST
+  });
+
+  try {
+    await api.products.deleteOne(product);
+
+    dispatch({
+      type: DELETE_SUCCESS,
+      payload: product
+    });
+
+    return true;
+  } catch (error) {
+    dispatch({
+      type: DELETE_FAILURE,
+      payload: error
+    });
+    return false;
   }
 };
 

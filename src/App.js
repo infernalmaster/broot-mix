@@ -17,6 +17,8 @@ import EditProduct from "./components/Products/EditProduct";
 import NewProduct from "./components/Products/NewProduct";
 import Login from "./components/Login";
 
+import requireAuth from "./components/requireAuth";
+
 function App() {
   return (
     <div className="App">
@@ -41,14 +43,17 @@ function App() {
         <Switch>
           <Route path="/login" component={Login} />
 
-          <Route path="/todo" component={Todo} />
+          <Route path="/todo" component={requireAuth(Todo)} />
           <Route path="/counter" component={Counter} />
           <Redirect exact from="/" to="/todo" />
 
-          <Route path="/products/new" component={NewProduct} />
-          <Route path="/products/:id/edit" component={EditProduct} />
-          <Route path="/products/:id" component={ShowProduct} />
-          <Route path="/products" component={ProductsList} />
+          <Route path="/products/new" component={requireAuth(NewProduct)} />
+          <Route
+            path="/products/:id/edit"
+            component={requireAuth(EditProduct)}
+          />
+          <Route path="/products/:id" component={requireAuth(ShowProduct)} />
+          <Route path="/products" component={requireAuth(ProductsList)} />
         </Switch>
       </Router>
     </div>

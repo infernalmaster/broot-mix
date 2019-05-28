@@ -21,6 +21,10 @@ class ShowProduct extends React.Component {
     return (
       <div>
         <h1>{product.name}</h1>
+
+        <div>{product.description}</div>
+
+        <img src={product.image} />
       </div>
     );
   }

@@ -41,6 +41,12 @@ class ProductForm extends React.Component {
             </div>
 
             <div>
+              <label>image</label>
+              <Field type="text" name="image" />
+              <ErrorMessage name="image" component="div" />
+            </div>
+
+            <div>
               <button type="submit" disabled={isSubmitting}>
                 Submit
               </button>

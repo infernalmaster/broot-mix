@@ -24,7 +24,7 @@ class ShowProduct extends React.Component {
 
         <div>{product.description}</div>
 
-        <img src={product.image} />
+        <img src={product.image} alt={product.name} />
       </div>
     );
   }

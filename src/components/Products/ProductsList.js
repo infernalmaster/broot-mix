@@ -41,7 +41,7 @@ class ProductsList extends React.Component {
 
         {this.props.products.map(product => (
           <div key={product.id}>
-            <img src={product.image} />
+            <img src={product.image} alt={product.name} />
             <Link to={`/products/${product.id}`}>{product.name}</Link>{" "}
             <Link to={`/products/${product.id}/edit`}>edit</Link>
           </div>
